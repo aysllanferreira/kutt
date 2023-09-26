@@ -1,3 +1,4 @@
+'use client';
 import styled, { css } from "styled-components";
 import { switchProp, prop, ifProp } from "styled-tools";
 import { Flex, BoxProps } from "rebass/styled-components";

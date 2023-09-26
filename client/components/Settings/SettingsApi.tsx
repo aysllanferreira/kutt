@@ -1,3 +1,4 @@
+'use client';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Flex } from "rebass/styled-components";
 import React, { FC, useState } from "react";

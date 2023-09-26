@@ -1,3 +1,4 @@
+'use client';
 import { useFormState } from "react-use-form-state";
 import React, { FC, useState } from "react";
 import { Flex } from "rebass";

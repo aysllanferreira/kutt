@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import { Flex, BoxProps } from "rebass/styled-components";
 import styled, { css, keyframes } from "styled-components";

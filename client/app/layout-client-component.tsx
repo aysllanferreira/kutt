@@ -1,7 +1,15 @@
+import { Metadata } from "next";
+const { publicRuntimeConfig } = getConfig();
+
+export const metadata: Metadata = {
+  title: `
+            ${publicRuntimeConfig.SITE_NAME} | Modern Open Source URL shortener.
+          `
+};
 import App, { AppContext } from "next/app";
 import { StoreProvider } from "easy-peasy";
 import getConfig from "next/config";
-import Router from "next/router";
+// import Router from "next/router";
 import decode from "jwt-decode";
 import cookie from "js-cookie";
 import Head from "next/head";
@@ -9,8 +17,6 @@ import React from "react";
 
 import { initializeStore } from "../store";
 import { TokenPayload } from "../types";
-
-const { publicRuntimeConfig } = getConfig();
 
 // TODO: types
 class MyApp extends App<any> {
@@ -25,7 +31,7 @@ class MyApp extends App<any> {
 
     const token =
       ctx.req && (ctx.req as any).cookies && (ctx.req as any).cookies.token;
-    const tokenPayload: TokenPayload = token ? decode(token) : null;
+    const tokenPayload: TokenPayload | null = token ? decode(token) : null;
 
     if (tokenPayload) {
       store.dispatch.auth.add(tokenPayload);
@@ -41,7 +47,7 @@ class MyApp extends App<any> {
   }
 
   componentDidMount() {
-    const { loading, auth } = this.store.dispatch;
+    const { auth } = this.store.dispatch;
     const token = cookie.get("token");
     const isVerifyEmailPage =
       typeof window !== "undefined" &&
@@ -53,11 +59,11 @@ class MyApp extends App<any> {
       });
     }
 
-    Router.events.on("routeChangeStart", () => loading.show());
-    Router.events.on("routeChangeComplete", () => {
-      loading.hide();
-    });
-    Router.events.on("routeChangeError", () => loading.hide());
+    // Router.events.on("routeChangeStart", () => loading.show());
+    // Router.events.on("routeChangeComplete", () => {
+    //   loading.hide();
+    // });
+    // Router.events.on("routeChangeError", () => loading.hide());
   }
 
   render() {
